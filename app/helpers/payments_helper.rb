@@ -5,4 +5,5 @@ module PaymentsHelper
   include Linkpoint::Helpers
   include Cyberplat::Helpers
   include Ouroboros::Helpers
+
 end

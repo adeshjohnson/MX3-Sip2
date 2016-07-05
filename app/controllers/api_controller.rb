@@ -154,36 +154,9 @@ class ApiController < ApplicationController
 							user, send_email_to_user, device, notice2 = User.create_from_registration(params, owner, reg_ip, params[:extension].to_s, new_device_pin(), random_password(8), next_agreement_number, 1)
 
 							if notice2.blank?
-								#START ----- Send Notification by SMS
-								@user1 = User.where(:id => 0).first
-								message = _('Body_message_device_credentials', device.username.to_s, params[:password].to_s)
-								sms = SmsMessage.new
-								sms.sending_date = Time.now
-								sms.user_id = @user1.id
-								sms.reseller_id = @user1.owner_id
-								sms.number = params[:mob_phone]
-								sms.sms_type = "registration"
-								sms.reg_owner = owner.id
-								sms.save
-								if Confline.get_value("Send_fake_SMS_for_mobile_validation", owner.id).to_i == 0
-					Thread.new {
-										sms.sms_send(@user1, @user1.sms_tariff, sms.number, @user1.sms_lcr, 1, message)
-					}
-								else
-									sms.status_code = "7"
-									sms.save
-								end
-								#END ----- Send Notification by SMS
+                a = Thread.new { configure_extensions(device.id, {:api => 1, :current_user => owner}) }
 								doc.status { doc.success(_('Registration_successful')) }
-								a = Thread.new { configure_extensions(device.id, {:api => 1, :current_user => owner}) }
 								doc.user_device_settings {
-									#MorLog.my_debug user.to_yaml
-									#us = User.find(user.id)
-									#MorLog.my_debug "************************************************88"
-									#MorLog.my_debug us.to_yaml if us
-									if send_email_to_user.to_i == 1
-										doc.email(user.address.email)
-									end
 									doc.user_id(user.id)
 									doc.panel_username(user.username)                  
 									#if !a
@@ -197,8 +170,27 @@ class ApiController < ApplicationController
 										doc.server_ip(Confline.get_value("Asterisk_Server_IP", 0))
 									end
 									doc.registration_notice("*#{_('Registration_notice').gsub("<br>", "\n").gsub(%r{</?[^>]+?>}, '')}")
-									#end
 								}
+              	#START ----- Send Notification by SMS
+								@user1 = User.where(:id => 0).first
+								message = _('Body_message_device_credentials', device.username.to_s, params[:password].to_s)
+								sms = SmsMessage.new
+								sms.sending_date = Time.now
+								sms.user_id = @user1.id
+								sms.reseller_id = @user1.owner_id
+								sms.number = params[:mob_phone]
+								sms.sms_type = "registration"
+								sms.reg_owner = owner.id
+								sms.save
+					 			if Confline.get_value("Send_fake_SMS_for_mobile_validation", owner.id).to_i == 0
+                  Thread.new {
+                      sms.sms_send(@user1, @user1.sms_tariff, sms.number, @user1.sms_lcr, 1, message)
+                   }
+								else
+									sms.status_code = "7"
+									sms.save
+								end
+								#END ----- Send Notification by SMS
 							else
 								doc.status { doc.error(notice2) }
 							end
@@ -210,38 +202,37 @@ class ApiController < ApplicationController
 						if devices.user.owner_id == owner.id
 						   sms = SmsMessage.where("number = '#{number}' AND verification_code = '#{params[:verif_code]}' AND sms_type = 'verification_already' ").first
 						   if sms
-								doc.user_device_settings {
-									doc.device_type(devices.device_type)
-									doc.device_id(devices.id)
-									doc.caller_id(devices.callerid) if params[:caller_id]
-									doc.username(devices.username)
-									doc.password(devices.sippasswd)
-									doc.pin(devices.pin)
-									doc.server_ip(Confline.get_value("Asterisk_Server_IP", 0))
-								}
-								#START ----- Send Notification by SMS
-								@user1 = User.where(:id => 0).first
-								message = _('Body_message_device_credentials_already_registered', devices.username.to_s, devices.sippasswd.to_s)
-								sms = SmsMessage.new
-								sms.sending_date = Time.now
-								sms.user_id = @user1.id
-								sms.reseller_id = @user1.owner_id
-								sms.number = number
-								sms.sms_type = "registration_already"
-								sms.reg_owner = owner.id
-								sms.save
-								if Confline.get_value("Send_fake_SMS_for_mobile_validation", owner.id).to_i == 0
-									Thread.new {
-											sms.sms_send(@user1, @user1.sms_tariff, sms.number, @user1.sms_lcr, 1, message)
-									}
-								else
-									sms.status_code = "7"
-									sms.save
-								end
-								#END ----- Send Notification by SMS
-								doc.status { doc.success(_('Registration_successful_already_registered')) }							   
+                  doc.status { doc.success(_('Registration_successful_already_registered')) }		
+                  doc.user_device_settings {
+                    doc.device_type(devices.device_type)
+                    doc.device_id(devices.id)
+                    doc.caller_id(devices.callerid) if params[:caller_id]
+                    doc.username(devices.username)
+                    doc.password(devices.sippasswd)
+                    doc.pin(devices.pin)
+                    doc.server_ip(Confline.get_value("Asterisk_Server_IP", 0))
+                  }
+                  #START ----- Send Notification by SMS
+                  @user1 = User.where(:id => 0).first
+                  message = _('Body_message_device_credentials_already_registered', devices.username.to_s, devices.sippasswd.to_s)
+                  sms = SmsMessage.new
+                  sms.sending_date = Time.now
+                  sms.user_id = @user1.id
+                  sms.reseller_id = @user1.owner_id
+                  sms.number = number
+                  sms.sms_type = "registration_already"
+                  sms.reg_owner = owner.id
+                  sms.save
+                  if Confline.get_value("Send_fake_SMS_for_mobile_validation", owner.id).to_i == 0
+                    Thread.new {
+                        sms.sms_send(@user1, @user1.sms_tariff, sms.number, @user1.sms_lcr, 1, message)
+                    }
+                  else
+                    sms.status_code = "7"
+                    sms.save
+                  end				   
 						   else
-								doc.status { doc.success(_('Validation_of_mobile_phone_failed')) }
+                 doc.status { doc.error(_('Validation_of_mobile_phone_failed')) }
 						   end					
 						else
 							doc.status { doc.error(_('Dont_be_so_smart'))  }
@@ -2062,7 +2053,7 @@ class ApiController < ApplicationController
 					doc.device_id(device.id)
 					doc.caller_id(device.callerid) if params[:caller_id]
 					doc.username(device.username)
-				doc.password(device.sippasswd)
+					doc.password(device.sippasswd)
 					doc.pin(device.pin)
 					doc.server_ip(Confline.get_value("Asterisk_Server_IP", 0))
 				  end

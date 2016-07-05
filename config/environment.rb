@@ -8,8 +8,8 @@ Encoding.default_external = Encoding::UTF_8
 Mor::Application.initialize!
 
 #---------------
-ExceptionNotifier_exception_recipients = %w(support@fututel.com)
-ExceptionNotifier_email_prefix="[GAMJOM.sip2]"
+ExceptionNotifier_exception_recipients = %w(soporte@fututel.com)
+ExceptionNotifier_email_prefix="[GAMJOM.sip]"
 
 Default_Language = "en"
 #---------------

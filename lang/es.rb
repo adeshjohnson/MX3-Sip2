@@ -629,7 +629,7 @@ Localization.define('es') do |l|
   l.store 'Sign_up', 'PASO FINAL. Registrarse'
   l.store 'Thank_you_for_registering', 'Gracias por registrarse a Voz IP de Fututel!'
     l.store 'Email_with_details_sent_to', 'Un email con todos los detalles de su nueva cuenta fue enviado a'	
-  l.store 'You_can_configure_your_device_with_following_settings', 'Configura tus Dispositivos y Accede a tu Panel de Usuario con los siguientes datos:'
+  l.store 'You_can_configure_your_device_with_following_settings', 'Configura tus Dispositivos/Aplicaciones y Accede a tu Panel de Usuario con los siguientes datos:'
   l.store 'You_can_login', 'Usted puede ingresar a su Panel'
   l.store 'Registration_successful', 'Registro satisfactorio'
   l.store 'Password_reenter', 'Ingrese la contraseña nuevamente'
@@ -2989,7 +2989,7 @@ Localization.define('es') do |l|
   l.store 'Can_only_test_SIP_providers', 'Can only test SIP Providers'
   l.store 'User_has_no_tariff', 'User has no Tariff'
   l.store 'Compound_tax', 'Compound TAX'
-  l.store 'Cannot_send_test_email_because_your_email_address_is_empty', 'Cannot send test email because your(%s) email address is empty'
+  l.store 'Cannot_send_test_email_because_your_email_address_is_empty', 'Cannot send test email because your email address is empty'
   l.store 'Apply_to_all_Vouchers', 'Apply to all Vouchers'
   l.store 'Allow_HTTP_requests', 'Allow HTTP requests'
   l.store 'IVR_editing_is_only_supported_on_Firefox', 'IVR editing is only available in Firefox'
@@ -5170,7 +5170,7 @@ Localization.define('es') do |l|
   l.store 'Send_balance_user_notice', 'Usuario para entrar al Panel. Generalmente es el Prefijo del País + Número Móvil, por ejemplo, 573187267705 (57 es el prefijo de Colombia).'	
   l.store 'Send_balance_device_notice', 'Generalmente es el mismo Usuario anterior. Se deja la opción por si fuese distinto.'	
   
-  l.store 'Send_code', 'Enviar código en SMS'
+  l.store 'Send_code', 'PASO 1. Enviar código en SMS'
 l.store 'Verification_code', 'Código de verificación'
 l.store 'Allow_registration_only_passwords_in_devices', 'Permitir a los dispositivos tener únicamente la misma contraseña de usuario'
 l.store 'Please_enter_mobile_phone', 'Por favor enter el número móvil'
@@ -5185,24 +5185,23 @@ l.store 'Limit_sms_reached', 'El límite para enviarle SMSs con código de verif
 l.store 'The_number_is_not_a_mobile_number', 'Este número no es un número móvil'
 l.store 'Country_not_found', 'El país no fue encontrado en nuestro sistema'
 l.store 'Please_enter_mobile_phone_and_select_country', 'Por favor escriba el número móvil y/o selecciona el país'
-l.store 'Welcome_signup_page', 'Registro al servicio Voz IP de Fututel. Se incluye verificación de su número móvil.'
+l.store 'Welcome_signup_page', 'Registro al servicio Voz IP. Se incluye verificación de su número móvil.'
 
 l.store 'Check_SMS_for_registration', 'SMS para Registro'
 l.store 'Sms_list_registration', 'Lista de SMS para Registro'
 l.store 'Ask_administrator_for_SMS_code', 'Pregunta al administrador por el código SMS de verificación'	
-l.store 'Send_fake_SMS_for_mobile_validation', 'Enviar falso SMS para validación de móvil' 
-l.store 'Please_enter_password_different_to_mob_phone', 'Por favor entre una contraseña distinta al móvil' 
+l.store 'Send_fake_SMS_for_mobile_validation', 'Enviar falso SMS para validación de móvil'  
+l.store 'MercadoPago_Title', 'Fututel - Voz IP' 
 
 
 l.store 'Body_message_device_credentials', 'Registro OK en vozip.fututel.com. Configure la Aplicacion o Entre a su Panel con USUARIO: %s y CONTRASENA: %s . Dudas: +573187267705'
 l.store 'Body_message_new_payment', 'Ha recibido un nuevo pago en vozip.fututel.com. Tipo: %s, Cantidad: %s, Su Cuenta: %s, Nuevo saldo: %s'
-
 l.store 'Body_message_verify_phone_sending_code_already_registered', 'Ya te encuentras registrado en vozip.fututel.com. Validacion de numero movil. CODIGO DE VERIFICACION: %s'
-
+  
 l.store 'Enter_another_mobile_number','Entre otro número móvil'
 l.store 'Body_message_device_credentials_already_registered','Ya estas registrado en vozip.fututel.com. Configure la Aplicacion o Dispositivo con USUARIO: %s y CONTRASENA: %s . Dudas: +573187267705'
 l.store 'Registration_successful_already_registered','Ya te encuentras registrado'
-
+l.store 'Login_Placeholder','Celular o Email o Usuario'
 
 
 end

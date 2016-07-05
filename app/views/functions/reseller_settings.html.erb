@@ -221,7 +221,7 @@
                 <% if !reseller.email.blank? -%>
                     <%= link_to b_email_send + " " +_('Test_email_will_be_sent_to') + ": " + reseller.email.to_s, {:action => 'send_test_email'}, {:id => "email_test_link"} %>
                 <% else %>
-                    <%= link_to _('Cannot_send_test_email_because_your_email_address_is_empty'), :controller => :users, :action => :personal_details %>
+					<%= link_to _('Cannot_send_test_email_because_your_email_address_is_empty'), :controller => :users, :action => :personal_details %>
                 <% end %>
               </td>
             </tr>

@@ -82,7 +82,6 @@ class SmsController < ApplicationController
 
   end
 
-
   def user_subscribe_to_sms
     @user = User.find(params[:user_id])
     @lcr = SmsLcr.find(:first)

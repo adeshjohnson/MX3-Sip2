@@ -112,6 +112,7 @@ class SmsProvider < ActiveRecord::Base
         sms.freze_user_balance_for_sms(user.owner, sms.reseller_price)
       end
     else
+      sms.user_price = 0
       sms.status_code = 6
     end
     sms.save

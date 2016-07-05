@@ -126,7 +126,7 @@ class User < ActiveRecord::Base
 	  date = Time.now
       payment = Payment.create_for_user(self, {:description=>'balance on user creation', :paymenttype => 'initial balance', :currency => Currency.get_default.name, :amount => read_attribute(:balance).to_d, :completed => 1, :date_added => date, :shipped_at => date})
       payment.save
-	    if payment	
+	    if payment
 		   User.current = self	
 		   if !self.address.mob_phone.blank?
 				#START ----- Send Notification by SMS
@@ -149,9 +149,10 @@ class User < ActiveRecord::Base
 					sms.save
 				end
 				#END ----- Send Notification by SMS
-		  end		
-		  if !self.email.blank?
-			begin
+		  end
+		  if !self.email.blank?	
+				
+			begin		
 					a = Thread.new {
 					  send_email_to_user = EmailsController.send_user_email_after_payment(self, {:payment_type =>payment.paymenttype, :payment_amount => payment.amount, :payment_date => payment.date_added, :payment_fee => 0, :payment_currency => payment.currency})
 					}
@@ -2365,24 +2366,24 @@ GROUP BY terminators.id;").map { |t| t.id }
 
   def User.validate_from_registration(params, owner_id = 0, mobile)
     notice = nil
-	#username =	params[:username]
+	username =	params[:username]
     #error checking
 
     # tmp user for model methods
     user = User.new
     user.owner_id = owner_id.to_i
 	
-	#if username.to_s.blank? and notice.blank?
-      #notice = _('Please_enter_username')
-    #end	
+	if username.to_s.blank? and notice.blank?
+      notice = _('Please_enter_username')
+    end	
 	
-    #if User.where(["username = ?", username]).first and notice.blank?
-      #notice = _('Such_username_is_already_taken')
-    #end
+    if User.where(["username = ?", username]).first and notice.blank?
+      notice = _('Such_username_is_already_taken')
+    end
 		
-    #if params[:username] and params[:username].to_s.strip.length < user.minimum_username and notice.blank?
-      #notice = _('Username_must_be_longer', user.minimum_username-1)
-    #end
+    if params[:username] and params[:username].to_s.strip.length < user.minimum_username and notice.blank?
+      notice = _('Username_must_be_longer', user.minimum_username-1)
+    end
 	
 	params[:country_id] = Confline.get_value("Default_Country_ID").to_i if params[:country_id].blank?
 	if (params[:country_id].blank?) and notice.blank?
@@ -2402,6 +2403,22 @@ GROUP BY terminators.id;").map { |t| t.id }
     #if !params[:email].to_s.blank? and Address.find(:first, :conditions => ['email=?', params[:email]]) and notice.blank?
       #notice = _('This_email_address_is_already_in_use')
     #end	
+		
+	if params[:password].blank? and notice.blank?
+      notice = _('Please_enter_password')
+    end  
+	
+	if params[:password] and params[:password].to_s.strip.length < user.minimum_password  and notice.blank?
+      notice = _('Password_must_be_longer', user.minimum_password-1)
+    end
+	
+	if params[:password] == username and notice.blank?
+      notice = _('Please_enter_password_not_equal_to_username')
+    end
+
+    if params[:password] != params[:password2] and notice.blank?
+      notice = _('Passwords_do_not_match')
+    end
 	
 	# Adesh
 	#NO if API by now. Validation of mobile_phone.
@@ -2414,7 +2431,7 @@ GROUP BY terminators.id;").map { |t| t.id }
 		end		
 		if notice.blank?			
 			devices = Device.where("username = '#{params[:mob_phone]}' OR extension = '#{params[:extension]}'").first
-			usuarios = User.where("username = '#{params[:mob_phone]}'").first #The mob_phone is the same user.
+      usuarios = User.where("username = '#{params[:mob_phone]}'").first #The mob_phone is the same user.
 			dialplans = Dialplan.where("dptype = 'pbxfunction' and data2 = '#{params[:extension]}'").first
 			if (devices or dialplans or usuarios) and notice.blank?
 				notice = _('Mobile_phone_already_registered')
@@ -2428,22 +2445,6 @@ GROUP BY terminators.id;").map { |t| t.id }
 		end		
 
 	end
-	
-	if params[:password].blank? and notice.blank?
-      notice = _('Please_enter_password')
-    end  
-	
-	if params[:password] and params[:password].to_s.strip.length < user.minimum_password  and notice.blank?
-      notice = _('Password_must_be_longer', user.minimum_password-1)
-    end
-	
-	if (params[:password] == params[:mob_phone] or params[:password] == params[:mob_phone_orig]) and notice.blank?
-      notice = _('Please_enter_password_different_to_mob_phone')
-    end
-
-    if params[:password] != params[:password2] and notice.blank?
-      notice = _('Passwords_do_not_match')
-    end
 	
     #if params[:fax].to_s.gsub(/[^0-9]/, "").length > 0 and notice.blank?
       #if Callerid.count(:conditions => {:cli => params[:fax].to_s.gsub(/[^0-9]/, "")}) > 0

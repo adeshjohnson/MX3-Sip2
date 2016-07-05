@@ -721,10 +721,11 @@ end
 	params[:fax] =  (prefix + params[:fax].to_s) if params[:fax].to_s !=""
 	
 	#Assign the username
+
 	params[:username] = params[:mob_phone]
 
 	session[:reg_country_id] = params[:country_id] 
-    #session[:reg_email] = params[:email]
+
 	params[:extension] = params[:mob_phone].to_s
     reg_ip= request.remote_ip
 	

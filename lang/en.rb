@@ -629,7 +629,7 @@ Localization.define('en') do |l|
   l.store 'Sign_up', 'Sign up'
   l.store 'Thank_you_for_registering', 'Thank you for registering to SuperVoz of Fututel!'
   l.store 'Email_with_details_sent_to', 'An email with all details of your new account was sent to'
-  l.store 'You_can_configure_your_device_with_following_settings', 'Configure your Devices and Access to your Control Panel with the following data:'
+  l.store 'You_can_configure_your_device_with_following_settings', 'You can configure your devices - application, IP phone, adaptador - with the following data:'
   l.store 'You_can_login', 'You can login your Panel'
   l.store 'Registration_successful', 'Registration successful'
   l.store 'Password_reenter', 'Password reenter'
@@ -871,7 +871,6 @@ Localization.define('en') do |l|
   l.store 'Custom_rate_updated', 'Custom rate updated'
   l.store 'Custom_rate_added', 'Custom rate added'
   l.store 'Custom_rate_deleted', 'Custom rate deleted'
-
   l.store 'Registration_notice', 'ATENTION: If you have doubts visit fututel.com -> SuperVoz, or contact us.'
   l.store 'Cant_delete_direction_destinations_exist', 'Cannot delete this direction - some destinations exist'
   l.store 'Cant_delete_destination_rates_exist', 'Cannot delete destination - there\'re assigned rates'
@@ -4632,9 +4631,11 @@ Localization.define('en') do |l|
   l.store 'Email_signup', "Email (Username for your Panel)"
   l.store 'Controlpanel_signup', "Data to access your Account's Control Panel (check calls, rates,...)"
   l.store 'Username_device', "Username's Number"
-  l.store 'Complete_Email_Validation', 'Complete email validation to grant all permissions to your account, visiting this link'
+  l.store 'Complete_Email_Validation', "Click on the following link to verify your SuperVoz' account"
   l.store 'Email_Validation_Success', 'Email validation was successful. All permissions are granted to your account now'
   l.store 'Email_Validation_Error', 'Email validation was wrong by some reason. Maybe your it was already validated, link is incorrect,...'
+  l.store 'SafetyPay_Error_Occurred', 'Error occurred while trying to pay through this method. Please try later or contact us'
+  l.store "Check_email_to_verify_account_during_registration", "Go to this email inbox and click on the link to verify your new SuperVoz's account."  
   
   l.store 'Send_balance_to_other', 'Send balance to other'	
   l.store 'Commission', 'Commission'	
@@ -4655,16 +4656,15 @@ Localization.define('en') do |l|
   l.store 'Send_balance_minimal_transference', 'Minimal amount to send balance'	
   l.store 'Send_balance_user_notice', 'This is generally your email'	
   l.store 'Send_balance_device_notice', 'This may be your extension number'	
-  
-  
-	l.store 'Send_code', 'Send code in SMS'
+
+  	l.store 'Send_code', 'Send code in SMS'
 	l.store 'Verification_code', 'Verification code'
 	l.store 'Allow_registration_only_passwords_in_devices', "Allow device to have only the same user's password"
 	l.store 'Please_enter_mobile_phone', 'Please enter the mobile number'
 	l.store 'Please_enter_verification_code', 'Please enter the verification code'
 	l.store 'Mobile_phone_already_registered', 'Mobile phone is already registered'
 	l.store 'Validation_of_mobile_phone_failed', 'Validation of mobile number failed'
-	l.store 'Body_message_verify_phone_sending_code', "Registration to the VOIP service SuperVoz - Fututel.com. Mobile phone's validation. VERIFICATION CODE: %s. Congratulations!!!"
+	l.store 'Body_message_verify_phone_sending_code', "Registration to the SuperVoz service - Fututel.com. Mobile phone validation. VERIFICATION CODE: %s. Congratulations!!!"
 	l.store 'Success_sending_sms_check_code_operator', 'Verification code was sent successfully as SMS to the mobile %s: %s'
 	l.store 'Error_sending_sms_check_code', 'Error at sending the verification code as SMS'
 	l.store 'Internal_error_unknown', 'Unknown internal error. Try again or contact us'
@@ -4674,10 +4674,10 @@ Localization.define('en') do |l|
 	l.store 'Please_enter_mobile_phone_and_select_country', 'Please type the mobile number and/or select country'	
 	l.store 'Welcome_signup_page', 'Signup to the SuperVoz of Fututel VOIP service. A mobile number validation is included.'
 	
-	l.store 'Check_SMS_for_registration', 'SMS for Registration'	
+	l.store 'Check_SMS_for_registration', 'SMS for Registration'
 	l.store 'Sms_list_registration', "SMS' List for Registration"
 	l.store 'Ask_administrator_for_SMS_code', 'Ask the admin for the SMS validation code'	
 	l.store 'Send_fake_SMS_for_mobile_validation', 'Send fake SMS for mobile validation'  
-	l.store 'Please_enter_password_different_to_mob_phone', 'Please enter a password different to mobile' 
+	l.store 'MercadoPago_Title', 'Fututel - SuperVoz'  
   
 end
